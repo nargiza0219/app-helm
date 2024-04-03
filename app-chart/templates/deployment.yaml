@@ -5,7 +5,7 @@ metadata:
   labels:
     managed-by: dso
 spec:
-  replicas: 3
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       application: nginx-app
@@ -14,11 +14,11 @@ spec:
       labels:
         application: nginx-app
     spec:
-      serviceAccountName: nginx-sa
+      serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
-        - name: nginx
-          image: us-central1-docker.pkg.dev/iron-country-417723/app-chart/my-nginx:v1
+        - name: {{ .Values.containerName }} 
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }} 
           ports:
-            - name: http
-              containerPort: 80
+            - name: {{ .Values.containerPort }} #http
+              containerPort: {{ .Values.containerPortNumber }} #80
              
