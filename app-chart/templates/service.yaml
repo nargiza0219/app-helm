@@ -3,13 +3,13 @@ kind: Service
 metadata:
   name: {{ .Values.serviceName }} #nginx-svc
   labels:
-    managed-by: dso
+{{- include "commonLabels" . | nindent 4 }}
 spec:
   selector:
     application: nginx-app
   ports:
-    - port: {{ .Values.containerPortNumber }}
+    - port: {{ .Values.nginxApp.containerPortNumber }}
       targetPort: http
       protocol: TCP
-      name: {{ .Values.containerPortName }}
+      name: {{ .Values.nginxApp.containerPortName }}
   

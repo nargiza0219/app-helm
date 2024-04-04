@@ -1,12 +1,13 @@
-replicas: 3
+nginxApp:
+  replicas: 3
+  containerName: nginx
+  deploymentName: nginx-app
+  image: 
+    repository: us-central1-docker.pkg.dev/iron-country-417723/app-chart/my-nginx
+    tag: "v2" 
+  containerPortName: http 
+  containerPortNumber: 80
+
+
 serviceAccountName: nginx-sa
-containerName: nginx
-
-image: 
-  repository: us-central1-docker.pkg.dev/iron-country-417723/app-chart/my-nginx
-  tag: "v2"
-  
-containerPortName: http 
-containerPortNumber: 80
 serviceName: nginx-svc
-
