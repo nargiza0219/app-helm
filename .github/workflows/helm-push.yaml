@@ -18,6 +18,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Lint Helm Chart
+        run: |
+          cd app-helm/
+          helm lint
+
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@master
         with:
