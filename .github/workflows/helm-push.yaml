@@ -1,0 +1,33 @@
+name: Helm package and push to GAR
+
+on:
+  push:
+    branches:
+      - main 
+
+env:
+  PROJECT_ID: iron-country-417723 
+  LOCATION: us-central1
+  REPO: app-helm
+
+jobs:
+  package_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0.6
+        with:
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+
+      - name: Package Helm Chart
+        run: |
+          helm package app-chart/ -d ./packaged-charts
+
+      - name: Push Helm Chart to GAR
+        run: |
+          export CHART=$(ls *.tgz)
+          Helm push $CHART oci://${{ env.PROJECT_ID }}-${{ env.LOCATION }}/${{ env.REPO }}/$CHART
