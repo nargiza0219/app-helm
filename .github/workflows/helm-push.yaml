@@ -1,9 +1,6 @@
 name: Helm package and push to GAR
 
-on:
-  push:
-    branches:
-      - main 
+on:  
   workflow_run:
     workflows: ["Helm Chart Linter"]
     types:
