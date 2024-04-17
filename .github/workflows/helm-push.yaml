@@ -12,7 +12,7 @@ on:
 env:
   PROJECT_ID: iron-country-417723 
   LOCATION: us-central1
-  REPO: app-helm
+  REPO: app-chart
 
 jobs:
   package_and_push:
@@ -35,8 +35,8 @@ jobs:
       - name: Package Helm Chart
         run: |
           helm package app-chart/ -d ./packaged-charts
+        working-directory: ${{ github.workspace }}
 
       - name: Push Helm Chart to GAR
         run: |
-          export CHART=$(ls *.tgz)
-          Helm push $CHART oci://${{ env.PROJECT_ID }}-${{ env.LOCATION }}/${{ env.REPO }}/$CHART
+          helm push ./packaged-charts/*.tgz oci://${{ env.LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}
