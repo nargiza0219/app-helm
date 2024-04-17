@@ -4,7 +4,11 @@ on:
   push:
     branches:
       - main 
-      
+  workflow_run:
+    workflows: ["Helm Chart Linter"]
+    types:
+      - completed
+
 env:
   PROJECT_ID: iron-country-417723 
   LOCATION: us-central1
@@ -22,9 +26,10 @@ jobs:
         run: |
           cd app-helm/
           helm lint
+     
 
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@master
+        uses: google-github-actions/auth@v2
         with:
           service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
