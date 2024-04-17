@@ -24,4 +24,4 @@ jobs:
 
       - name: Lint Helm chart
         run: |
-          helm lint app-helm/
+          helm lint app-chart/

@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main 
-
+      
 env:
   PROJECT_ID: iron-country-417723 
   LOCATION: us-central1
