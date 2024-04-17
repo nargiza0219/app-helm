@@ -39,4 +39,4 @@ jobs:
 
       - name: Push Helm Chart to GAR
         run: |
-          helm push ./packaged-charts/*.tgz oci://${{ env.LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}
+          helm push ./packaged-charts/*.tgz 'oci://${{ env.LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}'
